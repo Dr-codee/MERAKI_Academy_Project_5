@@ -1,19 +1,19 @@
-import { GoogleLogin } from '@react-oauth/google';
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { setLogin, setUserId } from "../../Service/Redux/Slice/Auth";
 import axios from "axios";
-import { setLogin, setUserId, setLogout } from "../../Service/Redux/Slice/Auth";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
-  const { token, isLoggedIn } = useSelector((state) => ({
-    token: state.auth.token,
-    isLoggedIn: state.auth.isLoggedIn,
-  }));
+  const { token, isLoggedIn } = useSelector((state) => {
+    return {
+      token: state.auth.token,
+      isLoggedIn: state.auth.isLoggedIn,
+    };
+  });
 
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -29,20 +29,15 @@ const Login = () => {
 
       if (result.data) {
         setMessage("");
-
-        dispatch(setLogin(result.data.token));
+        dispatch(setLogin(result.data));
         dispatch(setUserId(result.data.userId));
-        setStatus(true); 
-
+        console.log(result.data);
       } else throw Error;
     } catch (error) {
       if (error.response && error.response.data) {
         setMessage(error.response.data.message);
-
-      } else {
-        setMessage("Error happened while Login, please try again");
-
       }
+      setMessage("Error happened while Login, please try again");
     }
   };
 
@@ -50,7 +45,7 @@ const Login = () => {
     if (isLoggedIn) {
       navigate("/");
     }
-  }, []); 
+  }, [isLoggedIn]); // Added isLoggedIn to the dependency array
 
   return (
     <>
@@ -58,6 +53,7 @@ const Login = () => {
         <p className="Title">Login:</p>
         <form onSubmit={login}>
           <br />
+
           <input
             type="email"
             placeholder="Email"
@@ -70,23 +66,12 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <br />
-          <button>Login</button>
+          <button type="button" onClick={login}>
+            Login
+          </button>
         </form>
-        {status ? (
-          message && <div className="SuccessMessage">{message}</div>
-        ) : (
-          message && <div className="ErrorMessage">{message}</div>
-        )}
-      </div>
-      <div className='google' style={{ textAlign: 'center' }}>
-        <GoogleLogin
-          onSuccess={credentialResponse => {
-            console.log(credentialResponse);
-          }}
-          onError={() => {
-            console.log('Login Failed');
-          }}
-        />
+
+        {message && <div className="ErrorMessage">{message}</div>}
       </div>
     </>
   );

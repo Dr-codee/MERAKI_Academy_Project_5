@@ -24,11 +24,11 @@ const User = () => {
     const getUserInfo = async () => {
         try {
           const result = await axios.get("http://localhost:5000/users/info",
-          //  {
-          //   headers: {
-          //     Authorization: `Bearer ${token}`,
-          //   },
-          // }
+           {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
           );
           if (result.data.success) {
             console.log(result.data);

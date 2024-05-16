@@ -6,15 +6,18 @@ import axios from "axios";
 
 import {setUsers} from "../../Service/Redux/Slice/Users"
 
+
 const User = () => {
+  // const [information, setInformation] = useState(null);
+
     const {users} = useSelector((state) => {
         return {   
             users: state.users.users 
         };
       });
-      const {token,userId} =useSelector((state)=>{
-        return{ auth: state.auth.auth
-      }})
+      const { token } = useSelector((state) => ({
+        token: state.auth.token
+      }));
 
     const [message, setMessage] = useState("");
     
@@ -24,18 +27,19 @@ const User = () => {
     const getUserInfo = async () => {
         try {
           const result = await axios.get("http://localhost:5000/users/info",
-          //  {
-          //   headers: {
-          //     Authorization: `Bearer ${token}`,
-          //   },
-          // }
+           {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
           );
           if (result.data.success) {
-            console.log(result.data);
-             dispatch(setUsers(result.data));
+// setInformation(result.data)
+            // console.log(result.data);
+             dispatch(setUsers(result.data.result));
             setMessage("");
           } else throw Error;
-        } catch (error) {
+        } catch (error) { 
           if (!error.response.data.success) {
             return setMessage(error.response.data.message);
           }
@@ -45,16 +49,17 @@ const User = () => {
       useEffect(() => {
         getUserInfo();
       }, []);
-
+console.log(users);
   return (
   <>
-  {users&& users.map((users,index)=>{
+  {users&& users.map((user,index)=>{
     <div key={index} className="users">
-          <h1>{users.firstName}</h1>
-          <h2>{users.lastName}</h2>
-          <h3>{users.age}</h3>
-          <h4>{users.email}</h4>
-          <h5>{users.phone}</h5>
+          <h1>{user[index].firstname}</h1>
+          <h2>{user[index].lastname}</h2>
+          <h3>{user[index].age}</h3>
+          <h4>{user[index].email}</h4>
+          <h5>{user[index].phone}</h5>
+          
     </div>
   })}
 

@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
-
+import Map from "../pages/Map/Map";
 import User from "../pages/User/User"
 import Schedule from "../pages/Provider/Schedule"
 import Notes from "../pages/Notes/Notes"
@@ -84,7 +84,10 @@ export const router = createBrowserRouter([
                   {
                     path: "/User",
                       element: <User/>,
-                    },
+                    },{
+                      path: "/map",
+                        element: <Map/>,
+                      },
               {
                 path: "*",
                   element: <NotFound/>,

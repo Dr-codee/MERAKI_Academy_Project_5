@@ -1,19 +1,21 @@
+import "./Providerr.css"
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import "./Provider.css";
 import img from "./profile.png";
-
+import { setProvider } from "../../Service/Redux/Slice/Provider"
 function Provider() {
-  const [information, setInformation] = useState(null);
+  const dispatch = useDispatch();
   const [docInfo, setDocInfo] = useState(null);
   const [editExperience, setEditExperience] = useState(false); 
   const [editCertificates, setEditCertificates] = useState(false); 
   const [newExperience, setNewExperience] = useState(""); 
   const [newCertificates, setNewCertificates] = useState("");
 
-  const { token } = useSelector((state) => ({
+  const { token,provider } = useSelector((state) => ({
     token: state.auth.token,
+    provider: state.provider.provider,
   }));
 
   const getInfo = () => {
@@ -24,7 +26,8 @@ function Provider() {
         },
       })
       .then((result) => {
-        setInformation(result.data.result);
+        console.log(result.data.result);
+        dispatch(setProvider(result.data.result));
       })
       .catch((err) => {
         console.log(err);
@@ -39,6 +42,7 @@ function Provider() {
         },
       })
       .then((result) => {
+        console.log(result.data.result);
         setDocInfo(result.data.result);
       })
       .catch((err) => {
@@ -51,27 +55,28 @@ function Provider() {
     getDocInfo();
   }, []);
 
-
+console.log(provider);
   return (
     <>
       <div className="infoContainer">
-        {information && (
+        {provider && provider.map((provider,index)=>{
+return  (
           <div className="providerImg">
             <img style={{ width: "200px" }} src={img} alt="Provider Image" />
             <div className="infoo">
               <div>
-                {information[0].firstname} {information[0].lastname}
+                {provider.firstname} {provider.lastname}
                 <br />
               </div>
               Contact Information: <br />
               <div>
                 <span>📞</span>
-                {information[0].phone}
+                {provider.phone}
               </div>
-              <div>📧{information[0].email}</div>
+              <div>📧{provider.email}</div>
             </div>
           </div>
-        )}
+        )})}
 
         {docInfo && (
           <div className="info">

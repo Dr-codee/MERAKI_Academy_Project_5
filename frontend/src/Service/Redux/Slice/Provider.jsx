@@ -6,23 +6,19 @@ export const providerSlice = createSlice({
     },
     reducers: {
       setProvider: (state, action) => {
-        state.users = action.payload;
+        state.provider = action.payload;
       },
 
       updateProvider: (state, action) => {
-        state.users = state.users.map((elem, i) => {
-          if (elem.users_id == action.payload.history_id) {
+        state.provider = state.provider.map((elem, i) => {
+          if (elem.users_id == action.payload.users_id) {
             elem = action.payload.history;
           }
           return elem;
         });
       },
       addProvider: (state, action) => {
-        state.users = state.users.map((elem, i) => {
-          if (elem.history_id == action.payload.history_id) {
-            return elem.history.push(action.payload.history);
-          }
-        });
+        // 
       },
     },
   });

@@ -10,7 +10,8 @@ export default function docInfo() {
 
     const createDocInfo = () => {
         axios
-          .post(`http://localhost:5000/docInfo`,{experience:newExperience,certificates:newCertificates}, {
+          .post(`http://localhost:5000/docInfo`,
+          {experience:newExperience,certificates:newCertificates}, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -29,7 +30,7 @@ export default function docInfo() {
     //   }, []);
     
 
-  return (
+  return (<> {docInfo }
     <div className="Form">
         <p className="Title">Register:</p>
         <form onSubmit={createDocInfo}>
@@ -50,6 +51,6 @@ export default function docInfo() {
           <br />
           <button className="docRegBut" type="submit">Save</button>
         </form>
-      </div>
+      </div></>
   )
 }

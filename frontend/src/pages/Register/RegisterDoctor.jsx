@@ -42,7 +42,7 @@ const RegisterDoctor = () => {
       if (result.data.success) {
         setStatus(true);
         setMessage(result.data.message);
-        navigate("/Login");
+        navigate("/docInfo");
       } else {
         throw new Error(result.data.message);
       }

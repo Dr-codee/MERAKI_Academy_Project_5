@@ -31,7 +31,7 @@ export default function Appointment() {
 
       useEffect(() => {
         getAppointments();
-      }, []);
+      }, [appointment]);
 
 
 

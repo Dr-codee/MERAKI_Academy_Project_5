@@ -10,9 +10,9 @@ import { setProviderId } from '../../Service/Redux/Slice/ProviderId';
 
 function Landing() {
   const specialtiesWithPhotos = [
-    { photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG5X52F9HR3UXmzg6jIM4WWua1AhkYncSxFEP_2R16CA&s' },
-    {  photo: 'https://www.topdoctors.co.uk/files/Image/large/58b0424e-411c-4243-9228-4a0725bbab96.jpg' },
-    { photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDVnh7I7lki1MkthjPXjsZTlpVPnst5CipHCidC3F8kQ&s' },
+    { photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTngziubU1VMp8hywubnwQVzHNakgYqzKPk49cZmaQeA&s' },
+    {  photo: 'https://www.nm.org/-/media/northwestern/healthbeat/images/health%20library/nm-ten-signs-cardiologist_preview.jpg' },
+    { photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRy7-3yBtxzWkhPmQQ2VNRIEEgJGlc9j-akT5Zv38tHQA&s' },
     { photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6E8xzYvzO0Lk7IcGqAoo-vxVJiYgASeZwQasDsK6sBw&s' },
     
   ];

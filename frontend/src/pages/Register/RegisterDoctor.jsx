@@ -67,8 +67,6 @@ const RegisterDoctor = () => {
 
 
 
-
-
   return (
     <>
       <div className="Form">
